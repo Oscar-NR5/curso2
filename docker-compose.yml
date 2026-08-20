@@ -1,0 +1,32 @@
+# Entorno del curso con Docker
+#   docker compose run --rm app bash .devcontainer/crear-proyecto.sh  
+#   docker compose up -d                                              
+#   docker exec -it curso2-app bash                                   
+name: curso2
+
+services:
+  app:
+    build: .
+    container_name: curso2-app
+    hostname: curso                       
+    # Mismo usuario del host para que los archivos generados no queden de root
+    user: "${UID:-1000}:${GID:-1000}"
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8000"       
+    command: php artisan serve --host=0.0.0.0
+
+  vite:
+    image: node:20
+    container_name: curso2-vite
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HOME: /tmp
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "5173:5173"       # solo sirve assets/HMR al navegador, no se abre directo
+    command: sh -c "npm install && npm run dev"   # el host lo fija vite.config.js
