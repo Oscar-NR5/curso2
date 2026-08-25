@@ -9,9 +9,9 @@
 <body class="bg-gray-100 min-h-screen">
     <nav class="bg-blue-950 text-white">
         <div class="max-w-4xl mx-auto flex items-center justify-between px-8 py-4">
-            <a href="{{ route('inicio') }}" class="font-bold hover:text-blue-200 transition">Blog de Avisos</a>
+            <a href="{{ route('avisos.index') }}" class="font-bold hover:text-blue-200 transition">Blog de Avisos</a>
             <div class="flex gap-4 text-sm">
-                <a href="{{ route('inicio') }}" class="hover:text-blue-200 transition">Inicio</a>
+                <a href="{{ route('avisos.index') }}" class="hover:text-blue-200 transition">Inicio</a>
                 <a href="{{ route('contacto') }}" class="hover:text-blue-200 transition">Contacto</a>
             </div>
         </div>

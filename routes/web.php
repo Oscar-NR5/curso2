@@ -1,15 +1,15 @@
 <?php
 
-use App\Models\Post;
+use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-       $posts = Post::publicados()->with('categoria')->latest()->get();
+Route::get('/', [PostController::class, 'index'])->name('avisos.index');
+Route::get('/avisos/crear', [PostController::class, 'create'])->name('avisos.create');
+Route::post('/avisos', [PostController::class, 'store'])->name('avisos.store');
+Route::get('/avisos/{post}/editar', [PostController::class, 'edit'])->name('avisos.edit');
+Route::put('/avisos/{post}', [PostController::class, 'update'])->name('avisos.update');
+Route::delete('/avisos/{post}', [PostController::class, 'destroy'])->name('avisos.destroy');
 
-       return view('portada', ['posts' => $posts]);
-   })->name('inicio');
-
-Route::get('/contacto', fn () => view('contacto'))->name('contacto');
-Route::post('/contacto', function () {
-    return redirect()->route('inicio')->with('mensaje', 'Tu mensaje fue enviado correctamente.');
-})->name('contacto.enviar');
+Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
+Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.enviar');
