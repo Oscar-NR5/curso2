@@ -42,4 +42,9 @@ class Post extends Model
     {
         return $query->where('categoria_id', $categoriaId);
     }
+
+    public function scopeRecientes($query, $dias = 7)
+    {
+        return $query->where('created_at', '>=', now()->subDays($dias));
+    }
 }
