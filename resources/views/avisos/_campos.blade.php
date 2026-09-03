@@ -1,18 +1,24 @@
-<label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
-<input name="titulo" value="{{ old('titulo', $post->titulo ?? '') }}" class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none">
-@error('titulo') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
+<div class="field">
+    <label class="field-label" for="titulo">Título</label>
+    <input id="titulo" name="titulo" value="{{ old('titulo', $post->titulo ?? '') }}" class="field-input" @error('titulo') aria-invalid="true" @enderror>
+    @error('titulo') <p class="field-error">{{ $message }}</p> @enderror
+</div>
 
-<label class="block text-sm font-medium text-gray-700 mb-1 mt-4">Categoría</label>
-<select name="categoria_id" class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none">
-    <option value="">Elige una categoría...</option>
-    @foreach ($categorias as $categoria)
-        <option value="{{ $categoria->id }}" @selected(old('categoria_id', $post->categoria_id ?? '') == $categoria->id)>{{ $categoria->nombre }}</option>
-    @endforeach
-</select>
-@error('categoria_id') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
+<div class="field">
+    <label class="field-label" for="categoria_id">Categoría</label>
+    <select id="categoria_id" name="categoria_id" class="field-input" @error('categoria_id') aria-invalid="true" @enderror>
+        <option value="">Elige una categoría...</option>
+        @foreach ($categorias as $categoria)
+            <option value="{{ $categoria->id }}" @selected(old('categoria_id', $post->categoria_id ?? '') == $categoria->id)>{{ $categoria->nombre }}</option>
+        @endforeach
+    </select>
+    @error('categoria_id') <p class="field-error">{{ $message }}</p> @enderror
+</div>
 
-<label class="block text-sm font-medium text-gray-700 mb-1 mt-4">Contenido</label>
-<textarea name="contenido" rows="4" class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none">{{ old('contenido', $post->contenido ?? '') }}</textarea>
-@error('contenido') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
+<div class="field">
+    <label class="field-label" for="contenido">Contenido</label>
+    <textarea id="contenido" name="contenido" rows="4" class="field-input" @error('contenido') aria-invalid="true" @enderror>{{ old('contenido', $post->contenido ?? '') }}</textarea>
+    @error('contenido') <p class="field-error">{{ $message }}</p> @enderror
+</div>
 
-<button class="w-full bg-blue-900 text-white font-semibold rounded-lg py-2 hover:bg-blue-800 transition mt-5">{{ $submitLabel }}</button>
+<button class="button form-submit">{{ $submitLabel }}</button>

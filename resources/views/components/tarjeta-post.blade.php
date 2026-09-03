@@ -1,17 +1,25 @@
 @props(['post'])
 
-<article class="bg-white rounded-lg shadow hover:shadow-lg transition p-6">
-    <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full mb-2">
+<article class="post-card">
+    <span class="tag">
         {{ $post->categoria->nombre }}
     </span>
-    <h2 class="text-xl font-semibold text-gray-900">{{ $post->titulo }}</h2>
-    <p class="text-gray-600 mt-2">{{ $post->resumen }}</p>
-    <p class="text-gray-400 text-xs mt-4">{{ $post->created_at->format('d/m/Y') }}</p>
-    <a href="{{ route('avisos.edit', $post) }}" class="text-blue-700 text-sm font-semibold hover:underline mt-4 inline-block">Editar</a>
-    <form method="POST" action="{{ route('avisos.destroy', $post) }}" class="inline ml-3" onsubmit="return confirm('¿Borrar este aviso?')">
-        @csrf
-        @method('DELETE')
-        <button class="text-red-600 text-sm font-semibold hover:underline">Borrar</button>
-    </form>
+    <h2>{{ $post->titulo }}</h2>
+    <p class="post-summary">{{ $post->resumen }}</p>
+    <p class="post-date">{{ $post->created_at->format('d/m/Y') }}</p>
+    @if (auth()->user()?->can('update', $post) || auth()->user()?->can('delete', $post))
+        <div class="post-actions">
+            @can('update', $post)
+                <a href="{{ route('avisos.edit', $post) }}" class="text-link">Editar</a>
+            @endcan
+            @can('delete', $post)
+                <form method="POST" action="{{ route('avisos.destroy', $post) }}" onsubmit="return confirm('¿Borrar este aviso?')">
+                    @csrf
+                    @method('DELETE')
+                    <button class="button-danger">Borrar</button>
+                </form>
+            @endcan
+        </div>
+    @endif
 </article>
 

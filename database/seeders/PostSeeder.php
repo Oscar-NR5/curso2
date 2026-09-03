@@ -19,22 +19,22 @@ class PostSeeder extends Seeder
     public function run(): void
     {
         $avisos = [
-            ['titulo' => 'Cambio de horario en barandilla', 'categoria' => 'Aviso', 'dias' => 1,
-             'contenido' => 'A partir del lunes el turno nocturno inicia a las 21:00 horas para todo el personal operativo.'],
+            ['titulo' => 'Nueva publicación en la bitácora', 'categoria' => 'Aviso', 'dias' => 1,
+             'contenido' => 'Desde el lunes, la bitácora contará con una nueva sección para compartir novedades y comunicados de la comunidad.'],
             ['titulo' => 'Curso de primeros auxilios', 'categoria' => 'Capacitación', 'dias' => 2,
              'contenido' => 'Inscripciones abiertas en la academia para el curso de primeros auxilios básicos. Cupo limitado a 25 personas.'],
-            ['titulo' => 'Mantenimiento de patrullas', 'categoria' => 'Operativo', 'dias' => 4,
-             'contenido' => 'Las unidades del sector centro pasan a revisión mecánica esta semana según el rol publicado en cada comandancia.'],
-            ['titulo' => 'Actualización del directorio interno', 'categoria' => 'Aviso', 'dias' => 6,
-             'contenido' => 'Revisa que tu extensión y correo institucional aparezcan correctos en el directorio; los cambios se reportan a sistemas.'],
-            ['titulo' => 'Taller de manejo defensivo', 'categoria' => 'Capacitación', 'dias' => 9,
-             'contenido' => 'Nueva fecha para el taller de manejo defensivo dirigido a operadores de unidades. Registro con tu jefe de turno.'],
-            ['titulo' => 'Operativo coordinado en el sector norte', 'categoria' => 'Operativo', 'dias' => 12,
-             'contenido' => 'El viernes se realiza un operativo coordinado con protección civil en el sector norte; consulta el rol de participación.'],
-            ['titulo' => 'Renovación de credenciales', 'categoria' => 'Aviso', 'dias' => 20,
-             'contenido' => 'El módulo de credencialización atiende de 9:00 a 14:00. Lleva una fotografía reciente y tu credencial anterior.'],
-            ['titulo' => 'Simulacro de evacuación en oficinas centrales', 'categoria' => 'Operativo', 'dias' => 40,
-             'contenido' => 'Simulacro general en oficinas centrales; al sonar la alarma sigue las rutas marcadas y repórtate con tu brigadista.'],
+            ['titulo' => 'Mantenimiento de la plataforma', 'categoria' => 'Operativo', 'dias' => 4,
+             'contenido' => 'La plataforma tendrá una revisión técnica esta semana para mejorar la velocidad y la experiencia de lectura.'],
+            ['titulo' => 'Actualización del directorio de autores', 'categoria' => 'Aviso', 'dias' => 6,
+             'contenido' => 'Revisa que tu nombre y perfil de autor aparezcan correctamente; los cambios se pueden solicitar al equipo editorial.'],
+            ['titulo' => 'Taller de escritura para blogs', 'categoria' => 'Capacitación', 'dias' => 9,
+             'contenido' => 'Abrimos una nueva fecha para el taller de escritura clara y publicación responsable. Registro disponible para toda la comunidad.'],
+            ['titulo' => 'Calendario editorial del mes', 'categoria' => 'Operativo', 'dias' => 12,
+             'contenido' => 'El viernes publicaremos el calendario editorial del mes; consulta las fechas y temas de las próximas entradas.'],
+            ['titulo' => 'Renovación de perfiles', 'categoria' => 'Aviso', 'dias' => 20,
+             'contenido' => 'La sección de perfiles se actualizará próximamente para mostrar biografías, enlaces y temas de interés de cada autor.'],
+            ['titulo' => 'Respaldo de publicaciones', 'categoria' => 'Operativo', 'dias' => 40,
+             'contenido' => 'Realizaremos un respaldo general de las publicaciones para conservar el archivo y facilitar futuras consultas.'],
         ];
 
         $categorias = Categoria::pluck('id', 'nombre');
