@@ -12,9 +12,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::publicados()->with('categoria')->latest()->get();
-
-        return view('portada', ['posts' => $posts]);
+        return view('portada');
     }
 
     public function create()

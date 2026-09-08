@@ -8,11 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <body class="site-shell">
     <nav class="site-nav">
         <div class="nav-inner">
-            <a href="{{ route('avisos.index') }}" class="brand">Bitácora de Avisos</a>
+            <a href="{{ route('avisos.index') }}" class="brand">Blog de Avisos</a>
             <div class="nav-links">
                 <a href="{{ route('avisos.index') }}" class="nav-link">Avisos</a>
                 <a href="{{ route('contacto') }}" class="nav-link">Contacto</a>
@@ -29,5 +30,6 @@
         </div>
     </nav>
     @yield('contenido')
+    @livewireScripts
 </body>
 </html>
