@@ -212,6 +212,8 @@
           pista: 'La lista de avisos publicados. No pide token: cualquiera puede leerla, como tu portada. Fíjate en <b>data</b>, <b>links</b> y <b>meta</b>: eso lo agrega la paginación.' },
         { grupo: 'publico', metodo: 'GET', ruta: '/api/avisos/1', nombre: '/api/avisos/{id}',
           pista: 'Un aviso suelto. Cambia el número en la dirección. Si pones uno que no existe, la respuesta es <b>404</b>.' },
+                { grupo: 'publico', metodo: 'GET', ruta: '/api/resumen', nombre: '/api/resumen',
+                    pista: 'Un resumen de la actividad del blog. No corresponde a una tabla: devuelve totales y el número de avisos por categoría.' },
         { grupo: 'token', metodo: 'POST', ruta: '/api/token', nombre: '/api/token',
           cuerpo: { email: 'editor@blog.test', password: 'secreto123', dispositivo: 'probador' },
           pista: 'Mandas correo y contraseña una sola vez y recibes un token. De aquí en adelante el token te identifica: la API no usa sesión ni cookies. Al recibirlo se guarda solo aquí arriba.' },

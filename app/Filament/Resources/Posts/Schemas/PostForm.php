@@ -15,6 +15,9 @@ class PostForm
             ->components([
                 TextInput::make('titulo')
                     ->required(),
+                TextInput::make('resumen')
+                    ->maxLength(160)
+                    ->columnSpanFull(),
                 Textarea::make('contenido')
                     ->required()
                     ->columnSpanFull(),
