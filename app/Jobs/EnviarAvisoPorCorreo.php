@@ -8,9 +8,8 @@
 // aviso llevan la cuenta, para que el avance se vea desde tu API y desde la
 // pagina /cola-en-vivo.html.
 //
-// Tal como llega, SIN `implements ShouldQueue`, se ejecuta dentro de la
-// peticion: quien crea el aviso espera a que salgan todos los correos.
-// En el ejercicio le agregas esas dos palabras y el trabajo se va a la cola.
+// Al implementar `ShouldQueue`, quien crea el aviso no espera a que salgan
+// todos los correos: el worker procesa este trabajo en segundo plano.
 
 namespace App\Jobs;
 
@@ -20,7 +19,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 
-class EnviarAvisoPorCorreo
+class EnviarAvisoPorCorreo implements ShouldQueue
 {
     use Queueable;
 
@@ -30,7 +29,6 @@ class EnviarAvisoPorCorreo
     {
         $usuarios = User::all();
 
-        // Arranca la cuenta. Si el trabajo se reintenta, vuelve a empezar de cero.
         $this->post->destinatarios = $usuarios->count();
         $this->post->notificados = 0;
         $this->post->save();
@@ -41,4 +39,5 @@ class EnviarAvisoPorCorreo
             $this->post->increment('notificados');
         }
     }
+
 }

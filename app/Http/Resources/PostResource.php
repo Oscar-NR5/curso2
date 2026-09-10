@@ -15,6 +15,8 @@ class PostResource extends JsonResource
             'resumen' => $this->resumen,
             'contenido' => $this->contenido,
             'publicado' => $this->publicado,
+            'destinatarios' => $this->destinatarios ?? 0,
+            'notificados' => $this->notificados ?? 0,
             'categoria' => $this->whenLoaded('categoria', fn () => [
                 'id' => $this->categoria->id,
                 'nombre' => $this->categoria->nombre,
