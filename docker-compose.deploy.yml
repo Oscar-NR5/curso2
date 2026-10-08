@@ -1,0 +1,92 @@
+name: curso2-deploy
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${BD_LARAVEL:?BD_LARAVEL is required}
+      POSTGRES_USER: ${BD_USUARIO:?BD_USUARIO is required}
+      POSTGRES_PASSWORD: ${BD_CLAVE:?BD_CLAVE is required}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/crear-bases.sql:/docker-entrypoint-initdb.d/crear-bases.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  django:
+    build:
+      context: .
+      dockerfile: api-django/Dockerfile
+    environment:
+      SECRET_KEY: ${DJANGO_SECRET_KEY:?DJANGO_SECRET_KEY is required}
+      DEBUG: "False"
+      ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
+      DB_NAME: ${BD_DJANGO:-avisos_django}
+      DB_USER: ${BD_USUARIO:?BD_USUARIO is required}
+      DB_PASSWORD: ${BD_CLAVE:?BD_CLAVE is required}
+      DB_HOST: db
+      DB_PORT: "5432"
+    ports:
+      - "${PUERTO_DJANGO:-8082}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:8000/api/avisos/\")'"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  laravel:
+    build:
+      context: .
+      dockerfile: docker/laravel.Dockerfile
+    environment:
+      APP_NAME: Avisos
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY:?APP_KEY is required}
+      APP_URL: ${URL_LARAVEL:-http://localhost:8081}
+      LOG_CHANNEL: stderr
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: ${BD_LARAVEL:?BD_LARAVEL is required}
+      DB_USERNAME: ${BD_USUARIO:?BD_USUARIO is required}
+      DB_PASSWORD: ${BD_CLAVE:?BD_CLAVE is required}
+      SESSION_DRIVER: file
+      CACHE_STORE: file
+    ports:
+      - "${PUERTO_LARAVEL:-8081}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "php -r 'exit(@file_get_contents(\"http://127.0.0.1:8000/up\") === false ? 1 : 0);'"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - laravel_storage:/var/www/html/storage
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      django:
+        condition: service_healthy
+      laravel:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  laravel_storage:

@@ -1,4 +1,4 @@
-# ponytail: php:8.3-cli ya trae pdo_sqlite; solo faltan git/unzip para composer.
+# php:8.3-cli ya trae pdo_sqlite
 FROM php:8.3-cli
 RUN apt-get update && apt-get install -y --no-install-recommends git unzip libicu-dev libzip-dev python3 python3-venv \
     && docker-php-ext-install -j"$(nproc)" intl zip \
