@@ -43,15 +43,15 @@ Crea un archivo **`consultas-tinker.md`** en la raíz de tu proyecto (entra al P
 Copia esto en la descripción de tu PR y marca lo que cumples:
 
 ```markdown
-- [ ] composer run dev funciona y la portada carga con estilos
-- [ ] Portada con <x-tarjeta-post> y formulario de contacto con focus (Ejercicio 1)
-- [ ] php artisan migrate --seed deja la BD lista (modelos Post y Categoria + seeders)
-- [ ] Portada con datos reales: relación categoria y created_at formateado (nivel 1)
-- [ ] Columna publicado + scopes, la portada solo muestra publicados (nivel 2)
-- [ ] Etiquetas N:M funcionando: attach/sync probados en Tinker (nivel 2)
-- [ ] CRUD de avisos en PostController: crear, editar y borrar con validación (@error + old); web.php solo enruta (Ejercicio 5)
-- [ ] consultas-tinker.md con los Bloques A y B probados
-- [ ] Extra: N+1 medido, accessor resumen y soft deletes (nivel 3, opcional)
+- [x] composer run dev funciona y la portada carga con estilos
+- [x] Portada con <x-tarjeta-post> y formulario de contacto con focus (Ejercicio 1)
+- [x] php artisan migrate --seed deja la BD lista (modelos Post y Categoria + seeders)
+- [x] Portada con datos reales: relación categoria y created_at formateado (nivel 1)
+- [x] Columna publicado + scopes, la portada solo muestra publicados (nivel 2)
+- [x] Etiquetas N:M funcionando: attach/sync probados en Tinker (nivel 2)
+- [x] CRUD de avisos en PostController: crear, editar y borrar con validación (@error + old); web.php solo enruta (Ejercicio 5)
+- [x] consultas-tinker.md con los Bloques A y B probados
+- [x] Extra: N+1 medido, accessor resumen y soft deletes (nivel 3, opcional)
 ```
 
 ## Guía express: tu primer Pull Request

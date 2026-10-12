@@ -15,7 +15,8 @@ services:
     volumes:
       - .:/app
     ports:
-      - "8001:8000"       
+      - "8001:8000"      # Laravel
+      - "8002:8001"      # API Django
     command: php artisan serve --host=0.0.0.0
 
   vite:
@@ -30,3 +31,18 @@ services:
     ports:
       - "5173:5173"       # solo sirve assets/HMR al navegador, no se abre directo
     command: sh -c "npm install && npm run dev"   # el host lo fija vite.config.js
+
+  angular:
+    image: node:20
+    container_name: curso2-angular
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HOME: /tmp
+    working_dir: /app/frontend
+    volumes:
+      - .:/app
+    ports:
+      - "4200:4200"
+    depends_on:
+      - app
+    command: npm start -- --host 0.0.0.0
